@@ -17,3 +17,5 @@
 1. [Webpack详解](https://github.com/WsmDyj/Blog/blob/master/Webpack/webpack.md)
 ## Babel系列学习笔记:
 1. [Babel详解](https://github.com/WsmDyj/Blog/blob/master/Babel/Babel.md)
+## Vue系列学习笔记:
+1. [Vue组件精讲](https://github.com/WsmDyj/Blog/blob/master/Vue/vue--%E7%BB%84%E4%BB%B6%E7%B2%BE%E8%AE%B2.md)
