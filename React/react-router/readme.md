@@ -1,7 +1,7 @@
 ## 动态路由
-所谓动态路由，就是说路由规则不是固定的
+所谓动态路由，就是说路由规则不是固定的.在 <font color=#ff502c>react-router-dom</font> 的官方教程中，一共给出12个示例，但是个人认为，着12个示例看着真的很累人，很多写法，不是标准的企业项目应用的写法，所以针对这个现状，我想用企业项目开发的要求，对教程中的每一个示例进行重写，这篇教程就是它的第一个示例——基本使用和介绍。
 ## HashRouter还是BrowserRouter
-react-router的工作方式，是在组件树顶层放一个Router组件，然后在组件树中散落着很多reactr
+<font color=#ff502c>react-router</font> 的工作方式，是在组件树顶层放一个Router组件，然后在组件树中散落着很多reactr
 组件,顶层的Router组件负责分析监听URL的变化，在它保护伞之下的Route组件可以直接读取这些信息。
 
 很明显，Router和Route的配合，就是之前我们介绍过的"提供者模式"，Routershi 
@@ -183,3 +183,62 @@ class Comp extends React.Component {
   }
 }
 ```
+### 最后实现的一个简单完整的react-router
+```
+import React, { Component } from 'react';
+import './App.css';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import Home from './components/Home/Home'
+class App extends Component {
+  render() {
+    const About = ( ) => <h1>About</h1>;
+    const Nested = () => (
+      <div>
+        <Link to="/nested/one">One</Link>
+        <Link to="/nested/two">Two</Link>
+        <Link replace to="/nested/Three">Three</Link>
+        <div>选择一个点击</div>
+        <Route path="/nested/:minooo?" render={({match}) => <h2>URL: {match.params.minooo || 'minooo'}</h2>} />
+      </div>
+    )
+    return (
+      <div className="App">
+        <Router>
+          <Link to="/">Home</Link>
+          <Link to={{ pathname: '/about',search:'?sort=name', state:{ price: 18 } }}>About</Link>
+          <Link to="/contact/12?name=minooo">Contact</Link>
+          <Link to="/blog">blog</Link>
+          <Link to="/nested">Nested</Link>
+          {/* <NavLink to="/about" activeClassName="active">MyBlog</NavLink> */}
+        <main>
+          <Switch>
+            <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+            <Route path="/contact/:id" render={({ history, location, match }) =>
+              <h1>
+                {console.log(history, location, match)}
+                <span onClick={() => {history.push('/', {name:'mm'})}}>click me</span>
+              </h1>} />
+              <Route path="/blog" children={({ match }) => (
+                <li className={match?'active': ''}>
+                  <Link to="/">User</Link>
+                </li>
+            )} />
+              <Route path="/nested" render={Nested} />
+              <Route render={() => <h1>Page not found</h1>} />
+            </Switch>
+            </main>
+        </Router>
+      </div>
+    );
+  }
+}
+export default App;
+
+```
+## 结束

@@ -7,6 +7,9 @@
 * [个人简历](https://github.com/WsmDyj/puhua/blob/master/%E9%82%AC%E5%97%A3%E6%95%8F%E7%AE%80%E5%8E%86.pdf)
 ## ES6系列学习笔记:
 1. [Async/Await](https://github.com/WsmDyj/Blog/blob/master/ES6/Async/async.md)
+2. [for-of](https://github.com/WsmDyj/Blog/blob/master/ES6/For-Of/for-of.md)
+## 常用知识学习笔记:
+1. [图片懒加载]()
 ## JS系列学习笔记:
 1. [深入挖掘js之作用域闭](https://github.com/WsmDyj/Blog/blob/master/JS/%E6%B7%B1%E5%85%A5%E6%8C%96%E6%8E%98js%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%97%AD.md)
 2. [深入挖掘js之函数](https://github.com/WsmDyj/Blog/blob/master/JS/%E6%B7%B1%E5%85%A5%E6%8C%96%E6%8E%98js%E4%B9%8B%E5%87%BD%E6%95%B0.md)
