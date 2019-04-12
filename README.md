@@ -25,5 +25,5 @@
 ## React系列学习笔记：
 1. [React高阶组件](https://github.com/WsmDyj/Blog/tree/master/React/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6)
 2. [React-router.4](https://github.com/WsmDyj/Blog/tree/master/React/react-router)
-## leetCode闯关记:
+## LeetCode闯关记:
 1. [两数之和](https://github.com/WsmDyj/Blog/blob/master/leetcode/1.js)
