@@ -102,7 +102,6 @@ proxyData.name='lisi'
 // 使用proxy实现观察者模式
 // 观察者模式指的是函数自动观察数据对象的模式，一旦数据有变化，数据就会自动执行。
 
-
 const queuedObservers = new Set()
 const observe = fn => queuedObservers.add(fn)
 const observable = obj => new Proxy(obj, {set})
