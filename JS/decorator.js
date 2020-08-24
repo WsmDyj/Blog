@@ -27,16 +27,16 @@
 // wrap(Model1, 'getData')
 // console.log(new Model1().getData())
 
+function name(target) {
+  target.name = 'Niko'
+}
+
 @name
 class Person {
   sayHi() {
     console.log('my name is:', this.name)
   }
 }
-function name(constructor) {
-  return class extends constructor {
-    name = 'Niko'
-  }
-}
+
 
 new Person().sayHi()
