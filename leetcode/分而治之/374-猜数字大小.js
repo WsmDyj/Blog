@@ -12,4 +12,3 @@ var guessNumber = function (n) {
   }
   return rec(1, n)
 };
-console.log(guessNumber('a'))
