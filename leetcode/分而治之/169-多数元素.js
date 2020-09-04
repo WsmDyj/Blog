@@ -3,11 +3,23 @@
  */
 
 
- // 投票算法的原理是通过不断消除不同元素直到没有不同元素，剩下的元素就是我们要找的元素。
+ // 投票算法的原理:
+ // 票数count = 1   候选人majority = nums[0]
+ // if (相同) count+1 else count-1
+ // 当count=0 更换majority 重置count=1
+//  return majority
 
 var majorityElement = function (nums) {
-  let majority = nums[0];
+  let majority = nums[0],count =1
   for(let i = 1;i<nums.length;i++) {
-
+    if (count == 0) {
+      majority = nums[i]
+    } 
+    if (nums[i] === majority) {
+      count ++
+    } else {
+      count --
+    }
   }
+  return majority
 }

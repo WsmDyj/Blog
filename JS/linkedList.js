@@ -98,3 +98,54 @@ list.append(6)
 console.log(list.indexOf(9))
 
 // list.display()
+
+
+ // async --宏观
+async function async1() {
+  console.log('1')
+  await async2() //  promise
+  console.log('2')
+}
+ 
+     function async2() {
+        console.log('3')
+    }
+ 
+    // console.log('4') 
+ 
+    setTimeout(function () {
+        console.log('5')
+    }, 0)
+ 
+    async1()
+ 
+ 
+    new Promise(function ( resolve ) {  // 宏观
+        console.log('6')
+        resolve();
+    }).then(function () {  
+        console.log('7')
+    })
+ 
+    console.log('8')
+
+
+     // 4 1 3  6 8 7 2 5
+
+
+function A() {
+}
+function B(a) {
+    this.a = a;
+}
+function C(a) {
+    if (a) {
+        thia.a = a;
+    }
+}
+A.prototype.a = 1;
+B.prototype.a = 1;
+C.prototype.a = 1;
+console.log(new A());   
+console.log(new B());  
+console.log(new C(2)); 
