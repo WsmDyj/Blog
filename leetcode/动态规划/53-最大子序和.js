@@ -17,7 +17,3 @@ var maxSubArray = function (nums) {
   return Math.min(...dp)
 };
 console.log(maxSubArray([1,-2,3,4,-5,-6,-7]))
-
-
-
-

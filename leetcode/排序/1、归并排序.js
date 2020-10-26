@@ -27,8 +27,6 @@ const Merger = function(a,b) {
 
   while (j < m)
     c.push(b[j++]);
-
-  // console.log("将数组", a, '和', b, '合并为', c)
   return c;
 }
 

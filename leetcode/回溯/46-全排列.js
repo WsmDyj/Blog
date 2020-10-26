@@ -22,4 +22,4 @@ var permute = function (nums) {
 
 
 
-console.log(permute([]))
+console.log(permute([1,1,2]))
