@@ -19,7 +19,6 @@ var GetImportance = function (employees, id) {
     for (var i = 0; i <= employees.length - 1; i++) {
       if (employees[i][0] === idx) {
         sum = sum + employees[i][1]
-        console.log(sum)
         if (employees[i][2].length > 0) {
           for (let j = 0; j <= employees[i][2].length - 1; j++) {
             dfs(employees[i][2][j])
@@ -30,7 +29,3 @@ var GetImportance = function (employees, id) {
   }
   dfs(id)
 };
-
-console.log(GetImportance(
-  [[1, 2, [2]], [2, 3, []]]
-  , 2))
