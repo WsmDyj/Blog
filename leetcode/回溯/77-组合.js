@@ -5,25 +5,21 @@
  * @Parms: n = 4, k = 2
  */
 var combine = function (n, k) {
-  // 1 2 3 4 所有的组合
-  if (k <= 0 || n < k) return
-  let nums = Array.from(new Array(n + 1).keys()).slice(1)
-  let len = nums.length, res = []
-  const backtrack = (depth, index, path) => {
-    if (depth == k) {
-      console.log(path)
-      res.push([...path])
-    }
-    for (let i = index; i < len; i++) {
-      if (path.includes(nums[i])) {
-        continue
-      }
-      path.push(nums[i])
-      backtrack(depth + 1, i + 1, path)
-      path.pop()
-    }
-  }
-  backtrack(0, 0, [])
+  let nums = Array.from(new Array(n + 1).keys()).slice(1), res = [], path = []
+  if (n < 1) return res
+  backtrack(nums, path, res, k, nums.length, 0)
   return res
+
 }
-combine(4, 2)
+function backtrack (nums, path, res, k, len, begin) {
+  if (path.length === k) {
+    res.push([...path])
+    return
+  }
+  for (let i = begin; i < len; i++) {
+    path.push(nums[i])
+    backtrack(nums, path, res, k, len, i+1)
+    path.pop()
+  }
+}
+console.log(combine(4, 2))
