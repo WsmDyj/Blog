@@ -23,5 +23,4 @@ function dfs (nums, len, depth, path, used, res) {
     path.pop();
   }
 }
-
 console.log(permuteUnique([3, 3, 0, 3]))
