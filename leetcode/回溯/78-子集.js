@@ -21,16 +21,21 @@
 
 // 方法二
 const subsets = (nums) => {
-  const res = []
-  const dfs = (index, list) => {
-    res.push(list.slice())
-    for (let i = index; i < nums.length; i++) {
-      list.push(nums[i])
-      dfs(i+1, list)
-      list.pop()
-    }
-  }
-  dfs(0, [])
+  let len = nums.length, res = [], path = []
+  if (len === 0) return res
+  backtrack(nums, res, path, len)
   return res
 }
+function backtrack (nums, res, path, len) {
+  res.push([...path])
+  for (let i = 0; i < len; i ++) {
+    if (path.includes(nums[i])) {
+      return
+    }
+    path.push(nums[i])
+    backtrack(nums, res, path, len)
+    path.pop()
+  }
+}
+
 console.log(subsets([1,2,3]))
