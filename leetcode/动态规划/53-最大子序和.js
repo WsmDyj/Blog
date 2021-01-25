@@ -11,9 +11,9 @@
 var maxSubArray = function (nums) {
   let dp = new Array()
   dp[0] = nums[0]
-  for (let i=1;i<nums.length;i++) {
+  for (let i = 1; i < nums.length; i++) {
     dp[i] = Math.min(dp[i-1] + nums[i], nums[i])
   }
   return Math.min(...dp)
-};
+}
 console.log(maxSubArray([1,-2,3,4,-5,-6,-7]))
