@@ -72,4 +72,21 @@ function zxxFn () {
 var zxx = 1
 console.log(zxx) // 1
 zxxFn() 
-console.log(zxxs) // 2
+console.log(zxxs) // 
+
+
+var  arr = [1,2,3]
+function varOrlet() {
+  // for (var i = 0; i < 10; i++) {
+  //   setTimeout(function () { 
+  //     console.log(i);
+  //   }, 0);
+  // }
+  for (let i = 0; i < 10; i++) {
+    setTimeout(function () {
+      console.log(i) //  i 是循环体内局部作用域，不受外界影响。
+    }, 0);
+  }
+}
+
+varOrlet()
