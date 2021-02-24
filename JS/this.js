@@ -1,27 +1,34 @@
+Function.prototype.call2 = function (context) {
+  var context = Object(context) || window;
+  context.fn = this;
+
+  var args = [];
+  for (var i = 1, len = arguments.length; i < len; i++) {
+    args.push('arguments[' + i + ']');
+  }
+
+  var result = eval('context.fn(' + args + ')');
+
+  delete context.fn
+  return result;
+}
+
+// 测试一下
+var value = 2;
+
 var obj = {
-  a: 1,
-  getA: function() {
-    console.log(this === obj)  // true
-    console.log(this.a) // 1
+  value: 1
+}
+
+function bar (name, age) {
+  console.log(this.value);
+  return {
+    value: this.value,
+    name: name,
+    age: age
   }
 }
-obj.getA()
 
-var MyClass = function() {
-  this.name = 'sven'
-}
-var myclass = new MyClass()
-console.log(myclass.name)
+bar.call(null); // 2
 
-function foo() {
-  console.log(this.a)
-}
-var obj2 = {
-  a: 42,
-  foo: foo
-}
-var obj1 = {
-  a: 42,
-  obj2: obj2
-}
-obj1.obj2.foo()
+console.log(bar.call2(obj, 'kevin', 18));
