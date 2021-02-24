@@ -89,4 +89,45 @@ function varOrlet() {
   }
 }
 
-varOrlet()
+
+function test() {
+  for (var i = 0; i < 6; i++) {
+    (function (j) {
+      setTimeout(() => {
+        console.log('j', j)
+      }, 0);
+    })(i)
+  }
+}
+test()
+
+
+var MyModules = (function() {
+  var modules = {}
+  function define(name, deps, impl) {
+    for (var i = 0; i < deps.length; i++) {
+      deps[i] = modules[deps[i]]
+    }
+    modules[name] = impl.apply(impl, deps)
+  }
+  function get(name) {
+    return modules[name]
+  }
+  return {
+    define: define,
+    get: get
+  }
+})()
+
+
+var data = []
+for (var i = 0; i < 3; i++) {
+  data[i] = function () {
+    console.log('data', i)
+  }
+}
+data[0]()
+data[1]()
+data[2]()
+
+
