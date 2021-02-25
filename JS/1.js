@@ -1,8 +1,26 @@
-/*
- * @Author: your name
- * @Date: 2021-01-30 10:22:04
- * @LastEditTime: 2021-01-30 10:22:04
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /vcreact/Users/wusimin7/Documents/jd_code/Blog/JS/1.js
- */
+function Foo () {
+  getName = function () {
+    console.log(1);
+  };
+  return this;
+};
+Foo.getName = function () {
+  console.log(2);
+};
+Foo.prototype.getName = function () {
+  console.log(3);
+};
+var getName = function () {
+  console.log(4);
+};
+function getName () {
+  console.log(5);
+};
+
+Foo.getName(); // 1
+getName();
+Foo().getName();
+getName();
+new Foo.getName();
+new Foo().getName();
+new new Foo().getName(); 

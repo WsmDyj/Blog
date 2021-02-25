@@ -32,3 +32,16 @@ function bar (name, age) {
 bar.call(null); // 2
 
 console.log(bar.call2(obj, 'kevin', 18));
+
+
+// bind
+Function.prototype.bind2 = function() {
+  var that = this
+  var context = [].shift.call(arguments)
+  var args = [].slice.call(arguments)
+  return function() {
+    that.apply(context, args.concat([].slice.call(arguments)))
+  }
+}
+
+
