@@ -22,4 +22,4 @@ first().then((arg) => {
 
 console.log(4);
 
-// 3 7 4 1 2 5
+// 3 4 7 2 1 6  5
