@@ -1,8 +1,12 @@
 function Solution(prices) {
-  let DP = [], MIN; DP[0] = 0
-  for (let i = 1; i < prices.length; i++) {
-    
+  let minPrices = prices[0], maxProfit = 0
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i] < minPrices) {
+      minPrices = prices[i]
+    } else if (prices[i] - minPrices > maxProfit) {
+      maxProfit = prices[i] - minPrices
+    }
   }
-  return max
+  return maxProfit
 }
 console.log(Solution([7, 1, 5, 3, 6, 4]))
