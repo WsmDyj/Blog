@@ -25,6 +25,10 @@ Animal.prototype.eat = function(food) {
   console.log(this.name + '正在吃' + food)
 }
 
+function A() {
+  this.foo = 1
+}
+
 // 原型链继承
 function Cat() {}
 Cat.prototype = new Animal('cat')

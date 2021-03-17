@@ -47,7 +47,6 @@ dfs(tree)
 // 把队头出队并访问
 // 把队头对的children 挨个入队
 // 重复第二、三步，直到队列为空
-
 const bfs = (root) => {
   const q = [root]
   while (q.length > 0) {

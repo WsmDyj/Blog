@@ -4,14 +4,12 @@
 // F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
 // 给定 N，计算 F(N) 。
 
-
 var fib = function (num) {
   if (num === 1 || num ===2) {
     return num
   }
   return fib(num - 1) + fib(num - 2)
 };
-
 
 // var fibonacci = function (n, a= 0, b = 1) {
 //   if (n <= 1) return b
