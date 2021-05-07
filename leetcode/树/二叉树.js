@@ -97,7 +97,6 @@ const serachNode = function(node, key) {
     return true
   }
 }
-
 // 新增
 const insertNode = function(node, newNode) {
   if (newNode.key < node.key) {
@@ -114,7 +113,6 @@ const insertNode = function(node, newNode) {
     }
   }
 }
-
 // 树的遍历：中序、先序、后序
 /*
 * 中序遍历

@@ -2,7 +2,7 @@
 // 遇到包含重复元素的情况就回溯
 // 收集所有到达递归终点的额情况，并返回
 
-// var permute = function (nums) { 
+// var permute = function (nums) {
 //   let res = []
 //   backtrack([])
 //   function backtrack(path) {
@@ -38,6 +38,7 @@ function dfs (nums, len, depth, path, res) {
     if (path.includes(nums[i])) {
       continue
     }
+
     path.push(nums[i])
     dfs(nums, len, depth+1, path, res)
     path.pop();
