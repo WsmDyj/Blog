@@ -1,21 +1,27 @@
 import { h, Fragment, Portal } from './h.js'
 import render from './render.js'
+// 子组件 - 函数式组件
+function MyFunctionalComp(props) {
+  return h('div', null, props.text)
+}
+// 父组件的 render 函数中渲染了 MyFunctionalComp 子组件
+class ParentComponent {
+  localState = 'one'
 
-function MyFunctionalComponent() {
-  // 返回要渲染的内容描述，即 VNode
-  return h(
-    'div',
-    {
-      style: {
-        background: 'green'
-      }
-    },
-    [
-      h('span', null, '我是组件的标题1......'),
-      h('span', null, '我是组件的标题2......')
-    ]
-  )
+  mounted() {
+    setTimeout(() => {
+      this.localState = 'two'
+      this._update()
+    }, 2000)
+  }
+
+  render() {
+    return h(MyFunctionalComp, {
+      text: this.localState
+    })
+  }
 }
 
-const compVnode = h(MyFunctionalComponent)
-render(compVnode, document.getElementById('app'))
+// 有状态组件 VNode
+const compVNode = h(ParentComponent)
+render(compVNode, document.getElementById('app'))

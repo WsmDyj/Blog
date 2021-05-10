@@ -8,6 +8,10 @@ export function h(tag, data = null, children = null) {
   let flags = null
   if (typeof tag === 'string') {
     flags = tag === 'svg' ? VNodeFlags.ELEMENT_SVG : VNodeFlags.ELEMENT_HTML
+     // 序列化 class
+    if (data) {
+      data.class = normalizeClass(data.class)
+    }
   } else if (tag === Fragment) {
     flags = VNodeFlags.FRAGMENT
   } else if (tag === Portal) {
@@ -27,6 +31,7 @@ export function h(tag, data = null, children = null) {
           : VNodeFlags.COMPONENT_FUNCTIONAL // 函数式组件
     }
   }
+
 
   // 确定 childFlags
   let childFlags = null
@@ -66,6 +71,25 @@ export function h(tag, data = null, children = null) {
     childFlags,
     el: null
   }
+}
+
+function normalizeClass(classValue) {
+  // res 是最终要返回的类名字符串
+  let res = ''
+  if (typeof classValue === 'string') {
+    res = classValue
+  } else if (Array.isArray(classValue)) {
+    for (let i = 0; i < classValue.length; i++) {
+      res += normalizeClass(classValue[i]) + ' '
+    }
+  } else if (typeof classValue === 'object') {
+    for (const name in classValue) {
+      if (classValue[name]) {
+        res += name + ' '
+      }
+    }
+  }
+  return res.trim()
 }
 
 function normalizeVNodes(children) {
