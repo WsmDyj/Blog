@@ -6,18 +6,21 @@
  * @return {number}
  */
 var subarraySum = function(nums, k) {
-  let len = nums.length, ans = 0
-  preSum = new Array(len + 1).fill(0)
-  for (let i = 0; i < len; i++) {
-    preSum[i+1] = preSum[i] + nums[i]
-  }
-  for (let i = 1; i <= len; i++) {
-    for (let j = 0; j < i; j++) {
-      if (preSum[i] - preSum[j] === k) {
-        ans++
-      }
+  let preSum = new Map()
+  preSum.set(0,1)
+  let sum = 0, ans = 0
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i]
+    let sub = sum - k
+    if (preSum.has(sub)) {
+      ans += preSum.get(sub)
+    }
+    if (!preSum.has(sum)) {
+      preSum.set(sum, 1)
+    } else {
+      preSum.set(sum, preSum.get(sum) + 1)
     }
   }
   return ans
 }
-console.log(subarraySum([1,2,3], 3))
+console.log(subarraySum([3,5,2,-2,4,1], 2))

@@ -26,11 +26,11 @@ export default function render (vnode, container) {
 }
 
 // mount 函数的作用是把一个 VNode 渲染成真实 DOM，根据不同类型的 VNode 需要采用不同的挂载方式
-export function mount(vnode, container) {
+export function mount(vnode, container, refNode) {
   const { flags } = vnode
   if (flags & VNodeFlags.ELEMENT) {
     // 挂载普通标签
-    mountElement(vnode, container)
+    mountElement(vnode, container, refNode)
   } else if (flags & VNodeFlags.COMPONENT) {
     // 挂载组件
     mountComponent(vnode, container)
@@ -50,7 +50,7 @@ const domPropsRE = /\[A-Z]|^(?:value|checked|selected|muted)$/
 
 
 // 普通标签元素
-function mountElement(vnode, container) {
+function mountElement(vnode, container, refNode) {
   const el = document.createElement(vnode.tag)
   vnode.el = el
   const data = vnode.data
@@ -95,7 +95,7 @@ function mountElement(vnode, container) {
       }
     }
   }
-  container.appendChild(el)
+  refNode ? container.insertBefore(el, refNode) : container.appendChild(el)
 }
 
 function mountText(vnode, container) {
@@ -103,7 +103,6 @@ function mountText(vnode, container) {
   vnode.el = el
   container.appendChild(el)
 }
-
 
 function mountFragment(vnode, container) {
   const  { children,  childFlags } = vnode

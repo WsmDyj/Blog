@@ -154,12 +154,53 @@ function patchChildren(
         default:
           // 新的 children 中有多个子节点时，会执行该 case 语句块
           // 遍历旧的子节点，将其全部移除
-          for (let i = 0; i < prevChildren.length; i++) {
-            container.removeChild(prevChildren[i].el)
-          }
-          // 遍历新的子节点，将其全部添加
+          // for (let i = 0; i < prevChildren.length; i++) {
+          //   container.removeChild(prevChildren[i].el)
+          // }
+          // // 遍历新的子节点，将其全部添加
+          // for (let i = 0; i < nextChildren.length; i++) {
+          //   mount(nextChildren[i], container)
+          // }
+
+          // diff
+          // 寻找移动节点
+          let lastIndex = 0
           for (let i = 0; i < nextChildren.length; i++) {
-            mount(nextChildren[i], container)
+            const nextVNode = nextChildren[i]
+            let j = 0,
+              find = false
+            for (j; j < prevChildren.length; j++) {
+              const prevVNode = prevChildren[j]
+              if (nextVNode.key === prevVNode.key) {
+                find = true
+                patch(prevVNode, nextVNode, container)
+                if (j < lastIndex) {
+                  // 需要移动
+                  const refNode = nextChildren[i - 1].el.nextSibling
+                  container.insertBefore(prevVNode.el, refNode)
+                  break
+                } else {
+                  // 更新 lastIndex
+                  lastIndex = j
+                }
+              }
+            }
+            if (!find) {
+              // 挂载新节点
+              mount(nextVNode, container, false)
+            }
+          }
+          // 移除已经不存在的节点
+          for (let i = 0; i < prevChildren.length; i++) {
+            const prevVNode = prevChildren[i]
+            // 拿着旧 VNode 去新 children 中寻找相同的节点
+            const has = nextChildren.find(
+              nextVNode => nextVNode.key === prevVNode.key
+            )
+            if (!has) {
+              // 如果没有找到相同的节点，则移除
+              container.removeChild(prevVNode.el)
+            }
           }
           break
       }

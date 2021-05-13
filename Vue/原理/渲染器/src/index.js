@@ -1,27 +1,22 @@
-import { h, Fragment, Portal } from './h.js'
+import { h } from './h.js'
 import render from './render.js'
-// 子组件 - 函数式组件
-function MyFunctionalComp(props) {
-  return h('div', null, props.text)
-}
-// 父组件的 render 函数中渲染了 MyFunctionalComp 子组件
-class ParentComponent {
-  localState = 'one'
 
-  mounted() {
-    setTimeout(() => {
-      this.localState = 'two'
-      this._update()
-    }, 2000)
-  }
+// 旧的 VNode
+const prevVNode = h('div', null, [
+  h('p', { key: 'a' }, '节点1'),
+  h('p', { key: 'b' }, '节点2'),
+  h('p', { key: 'c' }, '节点3')
+])
 
-  render() {
-    return h(MyFunctionalComp, {
-      text: this.localState
-    })
-  }
-}
+// 新的 VNode
+const nextVNode = h('div', null, [
+  h('p', { key: 'c' }, '节点3'),
+  h('p', { key: 'a' }, '节点1'),
+])
 
-// 有状态组件 VNode
-const compVNode = h(ParentComponent)
-render(compVNode, document.getElementById('app'))
+render(prevVNode, document.getElementById('app'))
+
+// 2秒后更新
+setTimeout(() => {
+  render(nextVNode, document.getElementById('app'))
+}, 2000)

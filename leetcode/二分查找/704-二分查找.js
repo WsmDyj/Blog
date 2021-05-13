@@ -4,7 +4,7 @@
  * @return {number}
  */
 var search = function(nums, target) {
-  let left = 0, right = nums.length - 1
+  let left = 0, right = nums.length -1
   while (left <= right) {
     let mid = Math.floor(left + (right - left) / 2)
     if (nums[mid] === target) {
@@ -17,4 +17,4 @@ var search = function(nums, target) {
   }
   return -1
 }
-console.log(search([-1,0,3,5,9,12], 2))
+console.log(search([-1,0,3,5,9,12], 3))
