@@ -6,7 +6,7 @@
 var removeDuplicates = function(nums) {
   let slow = 0, fast = 0
   while (fast < nums.length) {
-    if (nums[fast] !== nums[slow]) {
+    if (nums[slow] !== nums[fast]) {
       slow++
       nums[slow] = nums[fast]
     }
