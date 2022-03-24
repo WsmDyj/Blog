@@ -29,3 +29,28 @@ var twoSum = function(nums, target) {
     }
   }
 }
+
+var twoSum3 = function(nums, target) {
+   nums.sort()
+  const res = []
+  let lo = 0, hi = nums.length - 1
+  while (lo < hi) {
+    let sum = nums[lo] + nums[hi]
+    let left = nums[lo], right = nums[hi]
+    if (sum < target) {
+      while (lo < hi && nums[lo] === left) lo++
+    }
+    if (sum > target) {
+      while (lo < hi && nums[hi] === right) hi--
+    }
+    if (sum = target) {
+      res.push([nums[lo], nums[hi]])
+      while (lo < hi && nums[lo] === left) lo++
+      while (lo < hi && nums[hi] === right) hi--
+    }
+  }
+  return res
+}
+
+// 11 22 33
+console.log(twoSum3([1,3,1,2,2,3], 4))

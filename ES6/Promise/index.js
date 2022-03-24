@@ -11,12 +11,15 @@ const async1 = async () => {
 }
 console.log("script start")
 async1().then((res) => console.log(res))
+
 console.log("script end")
+
 Promise.resolve(1)
   .then(2)
   .then(Promise.resolve(3))
   .catch(4)
   .then((res) => console.log(res))
+
 setTimeout(() => {
   console.log("timer2")
 }, 1000)

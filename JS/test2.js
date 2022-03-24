@@ -1,12 +1,13 @@
-console.log('script start');
+function exchange(arr) {
+  let left = 0, right = arr.length - 1, temp = ''
+  while (left < right) {
+    while (left < right && arr[left] % 2 === 1) left++
+    while (left < right && arr[right] % 2 === 0) right--
+    temp = arr[left]
+    arr[left] = arr[right]
+    arr[right] = temp
+  }
+  return arr
+}
 
-setTimeout(function() {
-  console.log('setTimeout');
-}, 0);
-
-Promise.resolve().then(function() {
-  console.log('promise1');
-}).then(function() {
-  console.log('promise2');
-});
-console.log('script end');
+console.log(exchange([1,2,3,4,6,7]))

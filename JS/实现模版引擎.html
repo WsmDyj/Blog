@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id = 'container'></div>
+<script type="text/html" id="user_tmpl">
+    <%for ( var i = 0; i < users.length; i++ ) { %>
+    <li>
+        <a href="<%=users[i].url%>">
+            <%=users[i].name%>
+        </a>
+    </li>
+    <% } %>
+</script>
+<script>
+  // 第一步
+  // 将 %> 替换成 p.push('
+  // 将 <% 替换成 ');
+  // 将 <%=xxx%> 替换成 ');p.push(xxx);p.push('
+    this.tmpl = function (str) {
+      var str = document.getElementById(str).innerHTML;
+      var string = "var p = []; p.push('" +
+        str
+        .replace(/[\r\t\n]/g, "")
+        .replace(/<%=(.*?)%>/g, "');p.push($1);p.push('")
+        .replace(/<%/g, "');")
+        .replace(/%>/g,"p.push('")
+        + "');"
+      eval(string)
+      return p.join('');
+    };
+  const results = document.getElementById("container");
+  var users = [
+    { "name": "Byron", "url": "http://localhost" },
+    { "name": "Casper", "url": "http://localhost" },
+    { "name": "Frank", "url": "http://localhost" }
+  ]
+  results.innerHTML = tmpl("user_tmpl", users);
+</script>
+</body>
+</html>

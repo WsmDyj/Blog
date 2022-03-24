@@ -2,21 +2,41 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
-  let sortNums = nums.sort(), res = []
-  for (let i = 0; i < sortNums.length; i++) {
-    let left = 0, right = sortNums.length - 1, k = 0-sortNums[i]     
-    while (left <= right) {
-      if (sortNums[left] + sortNums[right] === k) {
-        res.push([sortNums[left], sortNums[i], sortNums[right]])
-      } else if (sortNums[left] + sortNums[right] < k) {
-        left++
-      } else if (sortNums[left] + sortNums[right] > k) {
-        right--
-      }
+var twoSum = function(nums,start, target) {
+  const res = []
+  let lo = start, hi = nums.length - 1
+  while (lo < hi) {
+    let sum = nums[lo] + nums[hi]
+    let left = nums[lo], right = nums[hi]
+    if (sum < target) {
+      while (lo < hi && nums[lo] === left) lo++
+    }
+    if (sum > target) {
+      while (lo < hi && nums[hi] === right) hi--
+    }
+    if (sum = target) {
+      res.push([nums[lo], nums[hi]])
+      while (lo < hi && nums[lo] === left) lo++
+      while (lo < hi && nums[hi] === right) hi--
     }
   }
   return res
 }
-// [ -1, -1, -4, 0, 1, 2 ]
-console.log(threeSum([-1,0,1,2,-1,-4]))
+
+// var threeSum = function(nums) {
+//   nums.sort()
+//   let res = []
+//   for (let i = 0; i < nums.length; i++) {
+//     const tuples = twoSum(nums, i+1, 0 - nums[i])
+//     console.log(tuples)
+//     for (const tuple of tuples) {
+//       tuple.push(nums[i])
+//       tuple && res.push(tuple)
+//     }
+//     while (i < nums.length && nums[i] === nums[i +1]) i++
+//   }
+//   return res
+// }
+// [ -4, -1, -1, 0, 1, 2 ]
+// console.log(threeSum([-4, -1, -1, 0, 1, 2]))
+console.log(twoSum([-4, -1, -1, 0, 1, 2], 1, 4))
