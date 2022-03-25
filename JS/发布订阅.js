@@ -28,7 +28,6 @@ class EventEmitter {
   }
 }
 
-
 let event = new EventEmitter();
 
 // a.once("kak", aa)

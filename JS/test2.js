@@ -1,13 +1,26 @@
-function exchange(arr) {
-  let left = 0, right = arr.length - 1, temp = ''
-  while (left < right) {
-    while (left < right && arr[left] % 2 === 1) left++
-    while (left < right && arr[right] % 2 === 0) right--
-    temp = arr[left]
-    arr[left] = arr[right]
-    arr[right] = temp
-  }
-  return arr
+async function log1(next) {
+  console.log(1.1)
+  await next()
+  console.log(1.2)
 }
 
-console.log(exchange([1,2,3,4,6,7]))
+async function log2(next) {
+  console.log(2.1)
+  await next()
+  console.log(2.2)
+}
+
+function fn(array) {
+  function dispatch(index) {
+    if (index === array.length) return Promise.resolve()
+    return Promise.resolve(array[index](() => dispatch(index + 1)))
+  }
+  return dispatch(0)
+}
+
+fn([log1, log2])
+
+// 1。1
+// 2。1
+// 2。2
+// 1。2
