@@ -17,16 +17,20 @@ const timeout = (i) => {
 }
 
 async function asyncPool(limit, array, iteratorFn) {
-  const ret = []
-  const executing = []
-  for (const item of array) {
-    const p = Promise.resolve(iteratorFn(item))
-    const e = p.then(() => { executing.splice(executing.indexOf(e), 1)})
-    executing.push(e)
-    if (executing.length >= limit) {
-      await Promise.race(executing)
+  const ret = [] // 存储所有的异步任务
+  const executing = [] // 正在执行的任务
+  for (let item of array) {
+    const p = Promise.resolve().then(() => iteratorFn(item))
+    ret.push(p)
+    if (limit <= array.length) {
+      const e = p.then(() => executing.splice(executing.indexOf(e), 1))
+      executing.push(e)
+      if (executing.length >= limit) {
+        await Promise.race(executing);
+      }
     }
   }
+  console.log(ret)
   return Promise.all(ret)
 }
 

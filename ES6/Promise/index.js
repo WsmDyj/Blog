@@ -23,3 +23,12 @@ Promise.resolve(1)
 setTimeout(() => {
   console.log("timer2")
 }, 1000)
+
+// script start
+// async1
+// promise1
+// script end
+// async1 end
+// async1 success
+// timer2
+// timer1
