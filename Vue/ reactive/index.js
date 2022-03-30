@@ -48,11 +48,13 @@ function track(target, key) {
   deps.add(activeEffect)
   activeEffect.deps.push(deps)
 }
+
 const TriggerType = {
   SET: 'SET',
   ADD: 'ADD',
   DELETE: 'DELETE'
 }
+
 function trigger(target, key, type) {
   const depsMap = bucket.get(target)
   if (!depsMap) return
@@ -138,6 +140,7 @@ function createReactive(obj, isShallow = false, isReadonly = false) {
     }
   })
 }
+
 function reactive(obj) {
   return createReactive(obj)
 }
@@ -190,6 +193,7 @@ function computed(getter) {
   }
   return obj
 }
+// computed(() => obj.foo + obj.bar)
 
 function watch(source, cb, options = {}) {
   let getter

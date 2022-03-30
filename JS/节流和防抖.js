@@ -38,6 +38,7 @@ function throttle1(func, wait) {
     }
   }
 }
+
 // 两者结合，即开始执行最后也执行
 function throttle2(func, wait) {
   let context, args, pre = 0, timeout
@@ -101,5 +102,5 @@ function debounce2(func, wait, immediate) {
       }, wait)
     }
   }
- 
+  return result
 }

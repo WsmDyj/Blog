@@ -22,52 +22,79 @@ function installOf(left, right) {
   }
 }
 
+function deepClone(source, target) {
+  if (source !== null && typeof source !== 'object') return
+  for (let key of source) {
+    if (source[key] && typeof source[key] === 'object') {
+      target[key] = Array.isArray(source[key]) ? [] : {}
+     deepClone(source[key], target[key])
+    } else {
+      target[key] = source[key]
+    }
+  }
+  return target
+}
+
 // promise.all()
-function PromiseAll(promises) {
-  let result = []
-  let promiseCount = 0
+function promiseAll(arr) {
+  let count = 0, result = []
   return new Promise((resolve, reject) => {
-    for (let i = 0; i < promises.length; i++) {
-      let val = promises[i]
+    for (let i = 0; i < arr.length; i ++) {
+      let val = arr[i]
       Promise.resolve(val).then(res => {
-        promiseCount++
+        count++
         result[i] = res
-        if (promiseCount === promises.length) {
+        if (count === arr.length) {
           return resolve(result)
         }
-      }, (err) => {
+      },(err) => {
         return reject(err)
       })
     }
   })
 }
 
+function call(context) {
+  var context = context || window
+  context.fn = this
+  var args = []
+  for (var i = 0; i < arguments.length; i++) {
+    args.push('arguments[' + i +']')
+  }
+  var result = eval('context.fn('+ args + ')')
+  delete context.fn
+  return result
+}
+
+function apply(context, arr) {
+  var contenx = contenx || window
+  contenx.fn = this
+  var result
+  if (!arr) {
+    result = contenx.fn()
+  } else {
+    let args = []
+    for (let i = 0; i < arr.length; i++) {
+      args.push('arr[' + i + ']')
+    }
+    result = eval(contenx.fn('+ args + '))
+  }
+  return result
+}
+
 function bind(context) {
   let self = this
   const args = Array.prototype.slice.call(arguments, 1)
-  const fBind = function () {
-    self.apply(this instanceof self ? this : context, args.concat(Array.prototype.slice.call(arguments)))
+  const FNOP = function () {}
+  let fbound = function () {
+    self.apply(this instanceof fbound ? this: context, args.concat(Array.prototype.slice.call(arguments)))
   }
-  return fBind
+  FNOP.prototype = this.prototype
+  fbound.prototype = new FNOP()
+  return fbound
 }
 
-// 防抖
-function debounce(func, wait, immediate) {
-
+function reduce(callback, ...args) {
+  let start = 0, pre
+  if (args)
 }
-// 节流
-function throttle(func, wait) {
-  let context, args, timeout
-  return function () {
-    context = this
-    args = arguments
-    if (!timeout) {
-      timeout = setTimeout(function () {
-        func.apply(context, args)
-        timeout = null
-      }, wait)
-    }
-  }
-}
-// container.onmousemove = throttle(getUserAction, 1000);
-

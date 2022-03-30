@@ -42,7 +42,7 @@ let arr = [
   { id: 4, name: "部门4", pid: 3 },
   { id: 5, name: "部门5", pid: 4 },
 ]
-    
+
 const transferTree = (arr) => {
   const res = []
   const idMap = arr.reduce(
@@ -60,4 +60,4 @@ const transferTree = (arr) => {
   return res
 }
 
-console.log(transferTree(arr))
+// console.log(transferTree(arr))

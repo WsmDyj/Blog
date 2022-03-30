@@ -1,20 +1,3 @@
-function Person() {}
-var person = new Person() 
-console.log(person.__proto__ === Person.prototype) 
-console.log(Person === Person.prototype.constructor)
-
-// 属性屏蔽
-var obj1 = {
-  a: 1
-}
-var myObj = Object.create(obj1)
-console.log(obj1.hasOwnProperty("a"))  // true  hasOwnProperty：判断一个属性是否是在对象上，不包括原型上的属性
-console.log(myObj.hasOwnProperty("a"))  // false
-myObj.a++
-console.log(obj1.a, myObj.a)
-console.log(myObj.hasOwnProperty("a"))  // true
-
-
 function Animal(name) {
   this.name = name
   this.sleep = function() {
@@ -24,12 +7,10 @@ function Animal(name) {
 Animal.prototype.eat = function(food) {
   console.log(this.name + '正在吃' + food)
 }
+// 原型链继承 （在prototype 原型链上 new ）
+// 继承父类的属性和方法，也能继承父类原型上的属性和方法
+// 不能实现多继承，
 
-function A() {
-  this.foo = 1
-}
-
-// 原型链继承
 function Cat() {}
 Cat.prototype = new Animal('cat')
 
@@ -39,7 +20,8 @@ console.log(cat.eat('fish'))
 console.log(cat.sleep())
 console.log(cat instanceof Animal)  // instanceof 判断元素是否在另一个元素的原型链上
 
-// 构造函数继承
+// 构造继承 （在函数里通过call执行父类,将当前的this 绑定到父类上）
+// 可以实现多继承但是原型链上的属性和方法无法继承
 function Dog() {
   Animal.call(this, 'tom')
 }
@@ -50,6 +32,7 @@ console.log(dog.sleep())
 
 
 // 组合继承： 相当于构造继承和原型链继承的组合体
+// 调用两次父类构造函数（耗内存）
 function Snake() {
   Animal.call(this, 'snake')
 }
@@ -85,17 +68,7 @@ function Pig() {
 Pig.prototype = con // 继承con的实例
 con.constructor = Pig // 修复实例
 
-var pig = new Pig()
+const pig = new Pig()
 console.log(pig.name)
 console.log(pig.sleep())
 console.log(pig.eat('rice'))
-
-
-function foo() {
-  var a = 2
-  function bar() {
-    console.log(a)  // 输出什么
-  }
-  var c = 3
-}
-
